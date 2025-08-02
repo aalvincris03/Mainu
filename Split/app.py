@@ -28,7 +28,7 @@ def add():
     amount = float(data['amount'])
     reason = data['reason']
     lender = data['lender']
-    status = data['status'] == 'true'
+    status = data['status'] 
     new_debt = Debt(date=date, name=name, amount=amount, reason=reason, lender=lender, status=status)
     db.session.add(new_debt)
     db.session.commit()
@@ -72,7 +72,7 @@ def edit(id):
     debt.amount = float(data['amount'])
     debt.reason = data['reason']
     debt.lender = data['lender']
-    debt.status = data['status'] == 'true'
+    debt.status = data['status']
     db.session.commit()
     log = History(action='Edit', detail=f'Edited debt of {debt.name}', timestamp=datetime.now())
     db.session.add(log)
