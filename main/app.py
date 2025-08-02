@@ -137,6 +137,15 @@ def split():
 
     return jsonify({"success": True})
 
+#####
+def get_or_create_person(name):
+    person = Person.query.filter_by(name=name).first()
+    if not person:
+        person = Person(name=name)
+        db.session.add(person)
+        db.session.commit()
+    return person
+
 
 def log_history(details):
     db.session.add(History(details=details))
