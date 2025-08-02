@@ -136,3 +136,28 @@ def split():
         db.session.commit()
 
     return jsonify({"success": True})
+
+
+def log_history(details):
+    db.session.add(History(details=details))
+    db.session.commit()
+
+@app.route("/edit/<int:debt_id>", methods=["POST"])
+def edit_debt(debt_id):
+    debt = Debt.query.get_or_404(debt_id)
+    debt.name = get_or_create_person(request.form["name"])
+    debt.lender = get_or_create_person(request.form["lender"])
+    debt.amount = float(request.form["amount"])
+    debt.reason = request.form["reason"]
+    debt.status = "status" in request.form
+    db.session.commit()
+    log_history(f"Edited debt for {debt.name.name}")
+    return "", 204
+
+@app.route("/delete/<int:debt_id>", methods=["POST"])
+def delete_debt(debt_id):
+    debt = Debt.query.get_or_404(debt_id)
+    db.session.delete(debt)
+    db.session.commit()
+    log_history(f"Deleted debt for {debt.name.name}")
+    return "", 204
