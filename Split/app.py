@@ -23,12 +23,15 @@ def index():
 @app.route('/add', methods=['POST'])
 def add():
     data = request.json
+    status_raw = data.get('status', False)
+    status = True if status_raw == 'on' or status_raw is True else False
+    data = request.json
     date = data['date']
     name = data['name']
     amount = float(data['amount'])
     reason = data['reason']
     lender = data['lender']
-    status = data.get('status',False) 
+    status = status
     new_debt = Debt(date=date, name=name, amount=amount, reason=reason, lender=lender, status=status)
     db.session.add(new_debt)
     db.session.commit()
@@ -66,6 +69,9 @@ def delete(id):
 
 @app.route('/edit/<int:id>', methods=['POST'])
 def edit(id):
+    data = request.json
+    status_raw = data.get('status', False)
+    status = True if status_raw == 'on' or status_raw is True else False
     debt = Debt.query.get(id)
     data = request.json
     debt.name = data['name']
