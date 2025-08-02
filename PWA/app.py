@@ -6,8 +6,8 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = 'super-secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.secret_key = 'alvin'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Flask-Mail config
