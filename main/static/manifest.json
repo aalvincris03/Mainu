@@ -1,11 +1,10 @@
-
 {
   "name": "Utang Tracker",
-  "short_name": "UtangApp",
+  "short_name": "Utang",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#0d6efd",
+  "background_color": "#121212",
+  "theme_color": "#1f1f1f",
   "orientation": "portrait",
   "icons": [
     {
