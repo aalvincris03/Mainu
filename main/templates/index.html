@@ -43,6 +43,7 @@
           <th>Reason</th>
           <th>Lender</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody id="debtTable">
@@ -57,6 +58,10 @@
             <span class="badge bg-{{ 'success' if debt.status else 'secondary' }}">
               {{ "Paid" if debt.status else "Unpaid" }}
             </span>
+          </td>
+          <td>
+  <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ debt.id }}">✏️</button>
+  <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ debt.id }}">🗑️</button>
           </td>
         </tr>
         {% endfor %}
@@ -130,6 +135,47 @@
   </div>
 </div>
 
+{% for debt in debts %}
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal{{ debt.id }}" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" onsubmit="event.preventDefault(); updateDebt({{ debt.id }}, this)">
+      <div class="modal-header"><h5 class="modal-title">Edit Debt</h5></div>
+      <div class="modal-body">
+        <input name="name" class="form-control mb-2" value="{{ debt.name.name }}" required>
+        <input name="lender" class="form-control mb-2" value="{{ debt.lender.name }}" required>
+        <input name="amount" type="number" class="form-control mb-2" value="{{ debt.amount }}" required>
+        <input name="reason" class="form-control mb-2" value="{{ debt.reason }}" required>
+        <div class="form-check">
+          <input name="status" type="checkbox" class="form-check-input" id="editStatus{{ debt.id }}" {% if debt.status %}checked{% endif %}>
+          <label class="form-check-label" for="editStatus{{ debt.id }}">Paid</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal{{ debt.id }}" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" onsubmit="event.preventDefault(); deleteDebt({{ debt.id }})">
+      <div class="modal-header"><h5 class="modal-title">Delete Debt</h5></div>
+      <div class="modal-body">
+        Are you sure you want to delete the debt of <strong>{{ debt.name.name }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endfor %}
+  
 <!-- JavaScript -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -155,6 +201,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
   });
 });
+  function updateDebt(id, form) {
+  const formData = new FormData(form);
+  axios.post(`/edit/${id}`, formData)
+    .then(() => location.reload())
+    .catch(err => alert("Edit failed"));
+}
+
+function deleteDebt(id) {
+  axios.post(`/delete/${id}`)
+    .then(() => location.reload())
+    .catch(err => alert("Delete failed"));
+}
 </script>
 </body>
 </html>
