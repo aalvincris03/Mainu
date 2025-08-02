@@ -53,6 +53,12 @@ def index():
 
     return render_template('index.html', tables=tables)
 
+# One-time init route to create tables
+@app.route('/initdb')
+def initdb():
+    db.create_all()
+    return "Database tables created nyeee."
+
 
 @app.route("/add", methods=["POST"])
 def add():
