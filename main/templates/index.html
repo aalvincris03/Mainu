@@ -117,11 +117,13 @@ document.getElementById("splitForm").addEventListener("submit", function(e) {
     <form id="addForm" class="modal-content">
       <div class="modal-header"><h5 class="modal-title">Add Debt</h5></div>
       <div class="modal-body">
+              <input name="name" class="form-control mb-2" placeholder="Name" required>
         <select name="name" class="form-select mb-2">
           {% for p in persons %}
           <option>{{ p.name }}</option>
           {% endfor %}
         </select>
+              input name="lender" class="form-control mb-2" placeholder="Lender" required>
         <select name="lender" class="form-select mb-2">
           {% for p in persons %}
           <option>{{ p.name }}</option>
