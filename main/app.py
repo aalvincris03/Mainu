@@ -170,3 +170,13 @@ def delete_debt(debt_id):
     db.session.delete(debt)
     db.session.commit()
     return "", 204
+
+
+@app.route('/manifest.json')
+def manifest():
+    return app.send_static_file('manifest.json')
+
+@app.route('/service-worker.js')
+def sw():
+    return app.send_static_file('service-worker.js')
+
