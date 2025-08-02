@@ -29,6 +29,9 @@
 </head>
 <body class="p-3">
 
+  <!--PWA progressive web app -->
+<button id="installBtn" class="btn btn-info d-none">📲 Install App</button>
+  
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
     <h2 class="mb-0">Utang Tracker</h2>
@@ -250,6 +253,28 @@ function deleteDebt(id) {
     .then(() => console.log("Service Worker registered"))
     .catch(error => console.log("Service Worker registration failed:", error));
     }
+
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById("installBtn");
+  btn.classList.remove("d-none");
+  btn.addEventListener("click", () => {
+    btn.classList.add("d-none");
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        console.log("User installed the app");
+      } else {
+        console.log("User dismissed the install prompt");
+      }
+      deferredPrompt = null;
+    });
+  });
+});
   </script>
 </body>
 </html>
