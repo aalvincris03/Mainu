@@ -159,14 +159,14 @@ def edit_debt(debt_id):
     debt.amount = float(request.form["amount"])
     debt.reason = request.form["reason"]
     debt.status = "status" in request.form
-    log_history(f"Edited debt for {debt.name.name}")
+    log_history(f"Edited {debt.name.name} {debt.amount.amount} = {debt.status.status}")
     db.session.commit()
     return "", 204
 
 @app.route("/delete/<int:debt_id>", methods=["POST"])
 def delete_debt(debt_id):
     debt = Debt.query.get_or_404(debt_id)
-    log_history(f"Deleted debt for {debt.name.name}")
+    log_history(f"Edited {debt.name.name} {debt.amount.amount} = {debt.status.status}")
     db.session.delete(debt)
     db.session.commit()
     return "", 204
