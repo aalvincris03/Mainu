@@ -28,7 +28,7 @@ def add():
     amount = float(data['amount'])
     reason = data['reason']
     lender = data['lender']
-    status = get.get('status',false) 
+    status = data.get('status',false) 
     new_debt = Debt(date=date, name=name, amount=amount, reason=reason, lender=lender, status=status)
     db.session.add(new_debt)
     db.session.commit()
