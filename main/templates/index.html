@@ -2,7 +2,7 @@
 <html lang="en" data-bs-theme="dark">
 <head>
 
-
+<!--PWA progressive web app -->
 <link rel="manifest" href="/static/manifest.json">
 <meta name="theme-color" content="#1f1f1f">
 <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
@@ -242,5 +242,14 @@ function deleteDebt(id) {
     .catch(err => alert("Delete failed"));
 }
 </script>
+
+  <!--PWA progressive web app -->
+  <script>
+    if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/service-worker.js")
+    .then(() => console.log("Service Worker registered"))
+    .catch(error => console.log("Service Worker registration failed:", error));
+    }
+  </script>
 </body>
 </html>
