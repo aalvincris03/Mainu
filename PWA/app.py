@@ -55,9 +55,16 @@ class History(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.got_first_request
-def create_tables():
+# One-time init route to create tables
+@app.route('/initdb')
+def initdb():
     db.create_all()
+    return "Database tables created nyeee."
+
+
+#@app.got_first_request
+#def create_tables():
+    #db.create_all()
 
 @app.route('/')
 @login_required
