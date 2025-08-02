@@ -35,10 +35,18 @@ class History(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     details = db.Column(db.Text)
 
+@app.route("/")
+def index():
+    
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     inspector = inspect(db.engine)
     tables = inspector.get_table_names()
+    persons = Person.query.order_by(Person.name).all()
+    debts = Debt.query.order_by(Debt.date.desc()).all()
+    history = History.query.order_by(History.timestamp.desc()).limit(10).all()
+    #return render_template("index.html", persons=persons, debts=debts, history=history)
 
     if request.method == 'POST' and 'table_name' in request.form:
         table_name = request.form.get('table_name')
@@ -51,7 +59,7 @@ def index():
                 flash(str(e), 'warning')
         return redirect(url_for('index'))
 
-    return render_template('index.html', tables=tables)
+    return render_template('index.html', tables=tables,persons=persons, debts=debts, history=history)
 
 # One-time init route to create tables
 @app.route('/initdb')
