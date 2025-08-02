@@ -32,9 +32,12 @@ class History(db.Model):
     action = db.Column(db.String(200))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-@app.before_first_request
-def create_tables():
+# One-time init route to create tables
+@app.route('/initdb')
+def initdb():
     db.create_all()
+    return "Database tables created nyeee."
+
 
 @app.route('/')
 def index():
