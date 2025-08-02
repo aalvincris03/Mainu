@@ -85,6 +85,10 @@ def edit(id):
     db.session.commit()
     return jsonify({'message': 'Updated'})
 
+@app.route('/offline')
+def offline():
+    return "You're offline. Try again later."
+
 
 # One-time init route to create tables
 @app.route('/initdb')
