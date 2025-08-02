@@ -35,8 +35,6 @@ class History(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     details = db.Column(db.Text)
 
-@app.route("/")
-def index():
     
 
 @app.route('/', methods=['GET', 'POST'])
