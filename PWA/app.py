@@ -55,7 +55,7 @@ class History(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.before_first_request
+@app.got_first_request
 def create_tables():
     db.create_all()
 
