@@ -46,7 +46,7 @@ def index():
     debts = Debt.query.order_by(Debt.date.desc()).all()
     history = History.query.order_by(History.timestamp.desc()).limit(10).all()
     unpaid_by_name_lender = (
-    db.session.query(Person.name, Lender.name, func.sum(Debt.amount)).join(Debt.name)
+        db.session.query(Person.name, Lender.name, func.sum(Debt.amount)).join(Debt.name)
         .join(Debt.lender).filter(Debt.status == False)
         .group_by(Person.name, Lender.name).all())
     current_year = datetime.now().year
