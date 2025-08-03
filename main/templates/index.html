@@ -138,7 +138,28 @@
   </div>
   </div>
       -->
+<header class="container mb-3">
+  <div class="card shadow-lg p-2 border-0 bg-dark text-white animate__animated animate__fadeIn">
+    <div class="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2 text-center text-sm-start">
 
+      <!-- Icon and Title -->
+      <div class="d-flex align-items-center gap-2 flex-grow-1">
+        <i class="bi bi-house-fill text-primary fs-5"></i>
+        <div class="text-start">
+          <h6 class="mb-0 fw-bold gradient-text">BHouse Bills</h6>
+          <small class="text-muted d-none d-sm-block">Track your shared expenses</small>
+        </div>
+      </div>
+
+      <!-- Year Badge -->
+      <span class="badge bg-primary text-light shadow-sm px-3 py-1 fs-6 fw-semibold">
+        {{ current_year }}
+      </span>
+
+    </div>
+  </div>
+</header>
+  
 <header class="container mb-3">
   <div class="card shadow-lg p-3 border-0 bg-dark text-white animate__animated animate__fadeIn">
     <div class="row align-items-center">
