@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy.orm import aliased
 import os
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
@@ -44,6 +45,10 @@ def index():
     persons = Person.query.order_by(Person.name).all()
     debts = Debt.query.order_by(Debt.date.desc()).all()
     history = History.query.order_by(History.timestamp.desc()).limit(10).all()
+    unpaid_by_name_lender = (
+    db.session.query(Person.name, Lender.name, func.sum(Debt.amount)).join(Debt.name)
+        .join(Debt.lender).filter(Debt.status == False)
+        .group_by(Person.name, Lender.name).all())
     #return render_template("index.html", persons=persons, debts=debts, history=history)
 
     if request.method == 'POST' and 'table_name' in request.form:
@@ -57,7 +62,11 @@ def index():
                 flash(str(e), 'warning')
         return redirect(url_for('index'))
 
-    return render_template('index.html', tables=tables,persons=persons, debts=debts, history=history)
+    return render_template('index.html', tables=tables,
+                           persons=persons, 
+                           debts=debts, 
+                           history=history,
+                           unpaid_by_name_lender=unpaid_by_name_lender)
 
 # One-time init route to create tables
 @app.route('/initdb')
