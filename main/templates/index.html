@@ -8,6 +8,8 @@
   <meta name="theme-color" content="#1f1f1f">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
   <style>
@@ -94,16 +96,15 @@
 }
   </style>
 
-  <style>
-  .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  
+<style>
+  .gradient-text {
+    background: linear-gradient(90deg, #0d6efd, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  </style>
+</style>
+
 
   
 </head>
@@ -122,23 +123,26 @@
     </div>
     -->
 
-<!-- Add to your <head> for background blur support -->
-
-
-<!-- Floating Glass Title Card -->
-<div class="container mb-4">
-  <div class="glass-card p-4 d-flex flex-wrap justify-content-between align-items-center">
-    <div class="d-flex align-items-center gap-3">
-      <i class="bi bi-house-fill fs-2 text-info"></i>
-      <h2 class="mb-0 fw-semibold text-light">BHouse Bills</h2>
-    </div>
-    <div class="mt-3 mt-md-0 d-flex gap-2 flex-wrap">
-      <button id="themeToggle" class="btn btn-outline-light">🌙</button>
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">➕ Add Debt</button>
-      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#splitModal">💸 Split Pay</button>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+      <div class="container mt-5">
+  <div class="card shadow-lg p-4 border-0 bg-dark text-white animate__animated animate__fadeIn">
+    <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 text-center text-sm-start">
+      <i class="bi bi-house-fill text-primary fs-1"></i>
+      <div>
+        <h2 class="mb-1 fw-bold gradient-text">BHouse Bills</h2>
+        <p class="text-muted mb-0">Track your shared home expenses easily and efficiently.</p>
+      </div>
     </div>
   </div>
-</div>
+      </div>
+      <div>
+        <button id="themeToggle" class="btn btn-outline-light">🌙</button>
+        <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addModal">➕ Add Debt</button>
+        <button class="btn btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#splitModal">💸 Split Pay</button>
+      </div>
+    </div>
+
 
   
 
@@ -151,7 +155,7 @@
             <th>Name</th>
             <th>Amount</th>
             <th class="d-none d-md-table-cell">Reason</th>
-            <th class="d-none d-md-table-cell">Lender</th>
+            <th>Lender</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -163,7 +167,7 @@
             <td>{{ debt.name.name }}</td>
             <td>{{ debt.amount }}</td>
             <td class="d-none d-md-table-cell">{{ debt.reason }}</td>
-            <td class="d-none d-md-table-cell">{{ debt.lender.name }}</td>
+            <td>{{ debt.lender.name }}</td>
             <td>
               <span class="badge bg-{{ 'success' if debt.status else 'secondary' }}">
                 {{ "Paid" if debt.status else "Unpaid" }}
