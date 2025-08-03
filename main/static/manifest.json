@@ -1,6 +1,6 @@
 {
-  "name": "Utang Tracker",
-  "short_name": "Utang",
+  "name": "BHouse Bills",
+  "short_name": "BHouse Bills",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#121212",
