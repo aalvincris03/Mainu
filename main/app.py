@@ -39,7 +39,6 @@ class History(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     details = db.Column(db.Text)
 
-    
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -66,6 +65,21 @@ def index():
         .filter(Debt.status == False)
         .group_by(Borrower.name, Lender.name).all())
     current_year = datetime.now().year
+
+    name_filter = request.args.get('name', type=int)
+    sort_by = request.args.get('sort', default='date')
+
+    query = Debt.query
+
+    if name_filter:
+        query = query.filter(Debt.name_id == name_filter)
+
+    if sort_by == 'amount':
+        query = query.order_by(Debt.amount.desc())
+    else:
+        query = query.order_by(Debt.date.desc())
+
+    
     #return render_template("index.html", persons=persons, debts=debts, history=history)
 
     if request.method == 'POST' and 'table_name' in request.form:
