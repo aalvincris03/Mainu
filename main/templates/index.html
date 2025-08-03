@@ -186,6 +186,17 @@
   <div class="collapse show" id="debtTableCollapse">
     <div class="table-responsive">
       <table class="table table-bordered table-hover table-sm align-middle text-nowrap text-center mb-0">
+        <thead class="sticky-top bg-dark">
+  <tr>
+    <th onclick="sortTable(0)">Date 🔽</th>
+    <th onclick="sortTable(1)">Name 🔽</th>
+    <th onclick="sortTable(2)">Amount 🔽</th>
+    <th class="d-none d-md-table-cell" onclick="sortTable(3)">Reason 🔽</th>
+    <th onclick="sortTable(4)">Lender 🔽</th>
+    <th onclick="sortTable(5)">Status 🔽</th>
+    <th>Action</th>
+  </tr>
+        </thead>
         <thead class="sticky-top">
           <tr>
             <th class="d-none d-md-table-cell">Date</th>
@@ -418,5 +429,42 @@
       });
     });
   </script>
+
+
+  <script>
+function sortTable(columnIndex) {
+  const table = document.getElementById("debtTable").parentElement;
+  const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+  const isNumber = columnIndex === 2;
+  const isDate = columnIndex === 0;
+
+  let ascending = table.getAttribute("data-sort-dir") !== "asc";
+  table.setAttribute("data-sort-dir", ascending ? "asc" : "desc");
+
+  rows.sort((a, b) => {
+    let x = a.children[columnIndex].innerText.trim();
+    let y = b.children[columnIndex].innerText.trim();
+
+    if (isDate) {
+      x = new Date(x);
+      y = new Date(y);
+    } else if (isNumber) {
+      x = parseFloat(x) || 0;
+      y = parseFloat(y) || 0;
+    }
+
+    return ascending ? (x > y ? 1 : -1) : (x < y ? 1 : -1);
+  });
+
+  const tbody = table.querySelector("tbody");
+  tbody.innerHTML = "";
+  rows.forEach(row => tbody.appendChild(row));
+}
+  </script>
+
+
+
+  
 </body>
 </html>
