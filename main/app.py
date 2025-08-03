@@ -209,3 +209,6 @@ def manifest():
 def sw():
     return app.send_static_file('service-worker.js')
 
+@app.route('/ping')
+def ping():
+    return '', 204
