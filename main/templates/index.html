@@ -115,7 +115,7 @@
           <tr>
             <th>Date</th>
             <th>Name</th>
-            <th class="d-none d-md-table-cell">Amount</th>
+            <th>Amount</th>
             <th class="d-none d-md-table-cell">Reason</th>
             <th class="d-none d-md-table-cell">Lender</th>
             <th>Status</th>
@@ -127,7 +127,7 @@
           <tr>
             <td>{{ debt.date.strftime('%Y-%m-%d') }}</td>
             <td>{{ debt.name.name }}</td>
-            <td class="d-none d-md-table-cell">{{ debt.amount }}</td>
+            <td>{{ debt.amount }}</td>
             <td class="d-none d-md-table-cell">{{ debt.reason }}</td>
             <td class="d-none d-md-table-cell">{{ debt.lender.name }}</td>
             <td>
