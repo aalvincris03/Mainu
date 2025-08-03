@@ -110,10 +110,60 @@
   }
 </style>
 
+<style>
+  #sidebar.show {
+    display: block !important;
+    animation: slideIn 0.3s ease-out;
+  }
 
+  @keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @media (min-width: 992px) {
+    #sidebar {
+      display: block !important;
+      position: relative;
+      height: auto;
+    }
+    #main-content {
+      margin-left: 250px;
+    }
+    #toggleSidebar {
+      display: none;
+    }
+  }
+</style>
+  
   
 </head>
 <body class="p-3">
+
+<!-- Sidebar toggle and sidebar wrapper -->
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div id="sidebar" class="bg-dark text-white p-3 border-end shadow-sm" style="min-width: 250px; display: none; height: 100vh; position: fixed; z-index: 1040;">
+    <h5 class="mb-4">📊 Dashboard</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2"><a href="/" class="nav-link text-white">🏠 Home</a></li>
+      <li class="nav-item mb-2"><a href="#debtTableCollapse" class="nav-link text-white">📋 Debts</a></li>
+      <li class="nav-item mb-2"><a href="#history" class="nav-link text-white">🕒 History</a></li>
+      <li class="nav-item mb-2"><a href="#addDebt" class="nav-link text-white">➕ Add Debt</a></li>
+      <!-- Add more links if needed -->
+    </ul>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <div class="flex-grow-1" style="margin-left: 0;" id="main-content">
+    <!-- Toggle button -->
+    <button class="btn btn-sm btn-outline-light m-2 d-inline-block d-lg-none" id="toggleSidebar">
+      ☰
+    </button>
+
+    <!-- Your actual page content goes here -->
+
+  
   <!--<button id="installBtn" class="btn btn-info d-none mb-3">📲 Install App</button>-->
   <button id="installBtn" class="btn d-none">📲 Install App</button>
 <header class="container mb-2">
@@ -278,6 +328,11 @@
       </div>
     </div>
 
+      </div> <!-- Close main-content -->
+</div> <!-- Close d-flex -->
+
+
+  
     <!-- Modals -->
     {% for debt in debts %}
     <!-- Edit Modal -->
