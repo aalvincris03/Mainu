@@ -112,7 +112,7 @@
 
 <style>
 
-  #sidebar.show {
+#sidebar.show {
   display: block !important;
   animation: slideInLeft 0.3s ease forwards;
 }
@@ -131,12 +131,25 @@
     display: none !important;
   }
 }
+
 </style>
   
   
 </head>
 <body class="p-3">
+  
+  <!--<button id="installBtn" class="btn btn-info d-none mb-3">📲 Install App</button>-->
+  <button id="installBtn" class="btn d-none">📲 Install App</button>
+<header class="container mb-2">
+  <div class="card shadow-lg p-2 border-0 text-white animate__animated animate__fadeIn">
+    <div class="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2 text-center text-sm-start">
 
+      <!-- Icon and Title -->
+      <div class="d-flex align-items-center gap-2 flex-grow-1">
+
+
+
+        
 <!-- Sidebar toggle and sidebar wrapper -->
 <!-- Sidebar Backdrop -->
 <div id="sidebarOverlay" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-none" style="z-index: 1039;"></div>
@@ -170,16 +183,7 @@
 </button>
 
 
-  
-  
-  <!--<button id="installBtn" class="btn btn-info d-none mb-3">📲 Install App</button>-->
-  <button id="installBtn" class="btn d-none">📲 Install App</button>
-<header class="container mb-2">
-  <div class="card shadow-lg p-2 border-0 text-white animate__animated animate__fadeIn">
-    <div class="d-flex flex-row justify-content-between align-items-center flex-wrap gap-2 text-center text-sm-start">
-
-      <!-- Icon and Title -->
-      <div class="d-flex align-items-center gap-2 flex-grow-1">
+        
         <i class="bi bi-house-fill text-primary fs-5"></i>
         <div class="text-start">
           <h6 class="mb-0 fw-bold gradient-text">BHouse Bills</h6>
