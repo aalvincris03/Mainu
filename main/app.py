@@ -188,14 +188,14 @@ def edit_debt(debt_id):
     debt.amount = float(request.form["amount"])
     debt.reason = request.form["reason"]
     debt.status = "status" in request.form
-    log_history(f"Edited Debt - Name: {debt.name.name}, Amount: {debt.amount}, Reason: {debt.reason}, Lender: {debt.lender.name}, Status: {'Paid' if debt.status else 'Unpaid'}")
+    log_history(f"Edited Debt\nName: {debt.name.name}, Amount: {debt.amount}, Reason: {debt.reason}, Cashier: {debt.lender.name}, Status: {'Paid' if debt.status else 'Unpaid'}")
     db.session.commit()
     return "", 204
 
 @app.route("/delete/<int:debt_id>", methods=["POST"])
 def delete_debt(debt_id):
     debt = Debt.query.get_or_404(debt_id)
-    log_history(f"Deleted Debt - Name: {debt.name.name}, Amount: {debt.amount}, Reason: {debt.reason}, Lender: {debt.lender.name}, Status: {'Paid' if debt.status else 'Unpaid'}")
+    log_history(f"Deleted Debt\nName: {debt.name.name}, Amount: {debt.amount}, Reason: {debt.reason}, Cashier: {debt.lender.name}, Status: {'Paid' if debt.status else 'Unpaid'}")
     db.session.delete(debt)
     db.session.commit()
     return "", 204
