@@ -134,8 +134,33 @@
       </div>
     </div>
     
-  
 
+
+    <div class="card p-3 mb-4 border-warning border-start border-4 shadow-sm">
+  <h5 class="mb-3 text-warning">🧾 Unpaid Totals by Name & Lender</h5>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-sm text-center">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Lender</th>
+          <th>Total Unpaid</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for name, lender, total in unpaid_by_name_lender %}
+        <tr>
+          <td>{{ name }}</td>
+          <td>{{ lender }}</td>
+          <td class="fw-bold text-danger">₱{{ '%.2f'|format(total or 0) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+    </div>
+    
+    
     <!-- Debt Table -->
     <div class="table-responsive mb-4">
       <table class="table table-bordered table-dark table-hover table-sm align-middle text-nowrap text-center">
