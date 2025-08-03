@@ -49,6 +49,7 @@ def index():
     db.session.query(Person.name, Lender.name, func.sum(Debt.amount)).join(Debt.name)
         .join(Debt.lender).filter(Debt.status == False)
         .group_by(Person.name, Lender.name).all())
+    current_year = datetime.now().year
     #return render_template("index.html", persons=persons, debts=debts, history=history)
 
     if request.method == 'POST' and 'table_name' in request.form:
@@ -66,7 +67,8 @@ def index():
                            persons=persons, 
                            debts=debts, 
                            history=history,
-                           unpaid_by_name_lender=unpaid_by_name_lender)
+                           unpaid_by_name_lender=unpaid_by_name_lender,
+                           current_year=current_year)
 
 # One-time init route to create tables
 @app.route('/initdb')
