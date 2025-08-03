@@ -215,7 +215,7 @@
         <tbody id="debtTable">
           {% for debt in debts %}
           <tr>
-            <td class="d-none d-md-table-cell">{{ debt.date.strftime('%b %d, %Y' %H:%M) }}</td>
+            <td class="d-none d-md-table-cell">{{ debt.date.strftime('%b %d, %Y %H:%M') }}</td>
             <td>{{ debt.name.name }}</td>
             <td>{{ debt.amount }}</td>
             <td>{{ debt.reason }}</td>
