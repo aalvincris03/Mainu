@@ -173,6 +173,10 @@
 
 
 <!-- Debt Table -->
+  <div class="mb-3">
+  <input type="text" id="filterNameInput" class="form-control form-control-sm" placeholder="🔍 Filter by name...">
+  </div>
+  
 <div class="mb-2 border-1 shadow accordion">
   <!--<div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">-->
   <div class="accordion-item">
@@ -431,6 +435,8 @@
   </script>
 
 
+  
+<!--newlyadded-->
   <script>
 function sortTable(columnIndex) {
   const table = document.getElementById("debtTable").parentElement;
@@ -462,7 +468,27 @@ function sortTable(columnIndex) {
   rows.forEach(row => tbody.appendChild(row));
 }
   </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('filterNameInput');
+  const rows = document.querySelectorAll('#debtTable tr');
 
+  input.addEventListener('input', function () {
+    const query = input.value.toLowerCase();
+
+    rows.forEach(row => {
+      const nameCell = row.children[1];  // 1 = Name column
+      const name = nameCell.textContent.toLowerCase();
+
+      if (name.includes(query)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
 
 
   
