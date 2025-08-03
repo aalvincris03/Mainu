@@ -173,7 +173,7 @@
     
 
 
-
+<!-- Debt Table -->
 <div class="card mb-3 border-1 shadow">
   <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
     <h6 class="mb-0">
@@ -223,53 +223,7 @@
     </div>
   </div>
 </div>
-
-
-  
-
-
-
-
-
-  
-    <!-- Debt Table -->
-    <div class="table-responsive mb-2">
-      <table class="table table-bordered table-dark table-hover table-sm align-middle text-nowrap text-center">
-        <thead class="sticky-top bg-dark">
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Amount</th>
-            <th class="d-none d-md-table-cell">Reason</th>
-            <th>Lender</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="debtTable">
-          {% for debt in debts %}
-          <tr>
-            <td>{{ debt.date.strftime('%b-%d') }}</td>
-            <td>{{ debt.name.name }}</td>
-            <td>{{ debt.amount }}</td>
-            <td class="d-none d-md-table-cell">{{ debt.reason }}</td>
-            <td>{{ debt.lender.name }}</td>
-            <td>
-              <span class="badge bg-{{ 'success' if debt.status else 'secondary' }}">
-                {{ "Paid" if debt.status else "Unpaid" }}
-              </span>
-            </td>
-            <td>
-              <div class="d-flex justify-content-center gap-2 flex-wrap">
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ debt.id }}">✏️</button>
-                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ debt.id }}">🗑️</button>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    
 
     <!-- History Logs -->
     <div class="accordion mb-5" id="historyAccordion">
