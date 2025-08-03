@@ -188,10 +188,10 @@
       <table class="table table-bordered table-hover table-sm align-middle text-nowrap text-center mb-0">
         <thead class="sticky-top">
           <tr>
-            <th>Date</th>
+            <th class="d-none d-md-table-cell">Date</th>
             <th>Name</th>
             <th>Amount</th>
-            <th class="d-none d-md-table-cell">Reason</th>
+            <th>Reason</th>
             <th>Lender</th>
             <th>Status</th>
             <th>Action</th>
@@ -200,10 +200,10 @@
         <tbody id="debtTable">
           {% for debt in debts %}
           <tr>
-            <td>{{ debt.date.strftime('%b-%d') }}</td>
+            <td class="d-none d-md-table-cell">{{ debt.date.strftime('%b %d, %Y' %H:%M) }}</td>
             <td>{{ debt.name.name }}</td>
             <td>{{ debt.amount }}</td>
-            <td class="d-none d-md-table-cell">{{ debt.reason }}</td>
+            <td>{{ debt.reason }}</td>
             <td>{{ debt.lender.name }}</td>
             <td>
               <span class="badge bg-{{ 'success' if debt.status else 'secondary' }}">
