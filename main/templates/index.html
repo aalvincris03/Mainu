@@ -473,50 +473,29 @@ function sortTable(columnIndex) {
   rows.forEach(row => tbody.appendChild(row));
 }
   </script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const input = document.getElementById('filterNameInput');
-  const rows = document.querySelectorAll('#debtTable tr');
-
-  input.addEventListener('input', function () {
-    const query = input.value.toLowerCase();
-
-    rows.forEach(row => {
-      const nameCell = row.children[1];  // 1 = Name column
-      const name = nameCell.textContent.toLowerCase();
-
-      if (name.includes(query)) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
-    });
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const input = document.getElementById('filterNameInput');
-  const rows = document.querySelectorAll('#debtTable tr');
-
-  input.addEventListener('input', function () {
-    const query = input.value.toLowerCase();
-
-    rows.forEach(row => {
-      const nameCell = row.children[1];  // 1 = Name column
-      const name = nameCell.textContent.toLowerCase();
-
-      if (name.includes(query)) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
-    });
-  });
-});
-</script>
   
+  <!-- autocomplete -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('filterNameInput');
+  const rows = document.querySelectorAll('#debtTable tr');
 
+  input.addEventListener('input', function () {
+    const query = input.value.toLowerCase();
+
+    rows.forEach(row => {
+      const nameCell = row.children[1];  // 1 = Name column
+      const name = nameCell.textContent.toLowerCase();
+
+      if (name.includes(query)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
   
 </body>
 </html>
