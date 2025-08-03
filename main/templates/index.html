@@ -511,6 +511,11 @@
         });
       });
     });
+    // Ping the server every 4 minutes to keep session alive
+setInterval(() => {
+  fetch('/ping'); // Flask: create a route for this
+}, 240000); // 4 minutes
+    
   </script>
 
 
