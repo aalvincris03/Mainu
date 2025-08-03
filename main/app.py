@@ -98,7 +98,9 @@ def index():
                            debts=debts, 
                            history=history,
                            unpaid_by_name_lender=unpaid_by_name_lender,
-                           current_year=current_year)
+                           current_year=current_year,
+                          name_filter=name_filter,
+                          sort_by=sort_by)
 
 # One-time init route to create tables
 @app.route('/initdb')
