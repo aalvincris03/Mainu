@@ -173,9 +173,14 @@
 
 
 <!-- Debt Table -->
-  <div class="mb-3">
-  <input type="text" id="filterNameInput" class="form-control form-control-sm" placeholder="🔍 Filter by name...">
-  </div>
+  <div class="mb-0">
+  <input type="text" id="filterNameInput" list="nameSuggestions" class="form-control form-control-sm" placeholder="🔍 Filter by name...">
+  <datalist id="nameSuggestions">
+    {% for person in persons %}
+      <option value="{{ person.name }}"></option>
+    {% endfor %}
+  </datalist>
+</div>
   
 <div class="mb-2 border-1 shadow accordion">
   <!--<div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">-->
