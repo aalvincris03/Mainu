@@ -119,14 +119,15 @@
     <div class="card shadow-lg p-3 border-0 bg-dark text-white w-100 w-md-auto animate__animated animate__fadeIn">
       <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 text-center text-md-start">
         <i class="bi bi-house-fill text-primary fs-1"></i>
-        <div>
-          <h2 class="mb-1 fw-bold gradient-text">BHouse Bills</h2>
-          <p class="text-muted mb-0">Track your shared BHouse expenses easily and efficiently.</p>
-        </div>
         <!-- Current Year Badge -->
     <div class="ms-auto">
       <span class="badge bg-primary fs-6 shadow-sm px-3 py-2">{{ current_year }}</span>
     </div>
+        <div>
+          <h2 class="mb-1 fw-bold gradient-text">BHouse Bills</h2>
+          <p class="text-muted mb-0">Track your shared BHouse expenses easily and efficiently.</p>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -155,7 +156,7 @@
       <tbody>
         {% for borrower, lender, total in unpaid_by_name_lender %}
         <tr>
-          <td>{{ name }}</td>
+          <td>{{ borrower }}</td>
           <td>{{ lender }}</td>
           <td class="fw-bold text-danger">₱{{ '%.2f'|format(total or 0) }}</td>
         </tr>
