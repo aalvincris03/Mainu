@@ -8,6 +8,9 @@ from datetime import datetime
 from sqlalchemy.orm import aliased
 import os
 from sqlalchemy import func
+from sqlalchemy.orm import aliased
+
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
@@ -45,10 +48,23 @@ def index():
     persons = Person.query.order_by(Person.name).all()
     debts = Debt.query.order_by(Debt.date.desc()).all()
     history = History.query.order_by(History.timestamp.desc()).limit(10).all()
+    #unpaid_by_name_lender = (
+        #db.session.query(Person.name, Debt.lender, func.sum(Debt.amount)).join(Debt.name)
+       # .join(Debt.lender).filter(Debt.status == False)
+       # .group_by(Person.name, Debt.lender).all())
+
+    Borrower = aliased(Person)
+    Lender = aliased(Person)
     unpaid_by_name_lender = (
-        db.session.query(Person.name, Debt.lender, func.sum(Debt.amount)).join(Debt.name)
-        .join(Debt.lender).filter(Debt.status == False)
-        .group_by(Person.name, Debt.lender).all())
+        db.session.query(
+            Borrower.name.label("borrower_name"),
+            Lender.name.label("lender_name"),
+            func.sum(Debt.amount).label("total_unpaid")
+        )
+        .join(Debt, Debt.name_id == Borrower.id)
+        .join(Lender, Debt.lender_id == Lender.id)
+        .filter(Debt.status == False)
+        .group_by(Borrower.name, Lender.name).all())
     current_year = datetime.now().year
     #return render_template("index.html", persons=persons, debts=debts, history=history)
 
