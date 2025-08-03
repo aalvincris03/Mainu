@@ -102,12 +102,11 @@
     background: linear-gradient(90deg, #0d6efd, #6610f2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
+  }
     #gradient-text {
   background: linear-gradient(to right, #00c6ff, #0072ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-    }
   }
 </style>
 
@@ -148,7 +147,7 @@
     
 
 
-    <div class="card p-3 mb-1 mt-3 border-warning border-start border-1 shadow-sm">
+    <div class="card p-1 mb-1 mt-3 border-warning border-start border-1 shadow-sm">
   <h5 class="mb-1 text-warning">🧾 Unpaid Totals</h5>
   <div class="table-responsive">
     <table class="table table-bordered table-striped table-sm text-center">
@@ -172,7 +171,72 @@
   </div>
     </div>
     
-    
+
+
+
+
+
+  
+
+
+
+<div class="card mb-3 border-0 shadow">
+  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+    <h6 class="mb-0">📋 Debt Table</h6>
+    <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#debtTableCollapse" aria-expanded="false" aria-controls="debtTableCollapse">
+      Toggle
+    </button>
+  </div>
+
+  <div class="collapse show" id="debtTableCollapse">
+    <div class="table-responsive">
+      <table class="table table-bordered table-dark table-hover table-sm align-middle text-nowrap text-center mb-0">
+        <thead class="sticky-top bg-dark">
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th class="d-none d-md-table-cell">Reason</th>
+            <th>Lender</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="debtTable">
+          {% for debt in debts %}
+          <tr>
+            <td>{{ debt.date.strftime('%b-%d') }}</td>
+            <td>{{ debt.name.name }}</td>
+            <td>{{ debt.amount }}</td>
+            <td class="d-none d-md-table-cell">{{ debt.reason }}</td>
+            <td>{{ debt.lender.name }}</td>
+            <td>
+              <span class="badge bg-{{ 'success' if debt.status else 'secondary' }}">
+                {{ "Paid" if debt.status else "Unpaid" }}
+              </span>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center gap-2 flex-wrap">
+                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ debt.id }}">✏️</button>
+                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ debt.id }}">🗑️</button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+
+
+
+  
     <!-- Debt Table -->
     <div class="table-responsive mb-2">
       <table class="table table-bordered table-dark table-hover table-sm align-middle text-nowrap text-center">
