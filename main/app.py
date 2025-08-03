@@ -119,7 +119,7 @@ def add():
     db.session.add(debt)
     db.session.commit()
 
-    history = History(action="add", debt_id=debt.id, details=f"Added debt for {name} amount {amount}")
+    history = History(action="add", debt_id=debt.id, details=f"Added new debt :\n{name} amount : {amount} ({reason})")
     db.session.add(history)
     db.session.commit()
 
@@ -160,7 +160,7 @@ def split():
         db.session.add(debt)
         db.session.commit()
 
-        history = History(action="split_add", debt_id=debt.id, details=f"Split debt for {name} amount {split_amount}")
+        history = History(action="split_add", debt_id=debt.id, details=f"Added new debt by Split function :\n{name} amount : {split_amount} ({reason})")
         db.session.add(history)
         db.session.commit()
 
