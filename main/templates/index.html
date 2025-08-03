@@ -98,10 +98,16 @@
 
   
 <style>
-  .gradient-text {
+  #gradient-text {
     background: linear-gradient(90deg, #0d6efd, #6610f2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    .gradient-text {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    }
   }
 </style>
 
@@ -112,15 +118,15 @@
   <!--<button id="installBtn" class="btn btn-info d-none mb-3">📲 Install App</button>-->
   <button id="installBtn" class="btn d-none">📲 Install App</button>
 
-
+<!--
   <div class="container mb-1">
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <!-- App Title Card -->
+    
     <div class="card shadow-lg p-3 border-0 bg-dark text-white w-100 w-md-auto animate__animated animate__fadeIn">
       <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 text-center text-sm-start">
         <i class="bi bi-house-fill text-primary fs-1"></i>
         <span class="badge fw-bold gradient-text fs-6 shadow-sm">{{ current_year }}</span>
-        <!-- Current Year Badge -->
+        
     
         <div>
           <h2 class="mb-1 fw-bold gradient-text">BHouse Bills</h2>
@@ -131,7 +137,35 @@
     </div>
   </div>
   </div>
+      -->
+
+
+<div class="container mb-3">
+  <div class="card shadow-lg border-0 bg-dark text-white p-3 animate__animated animate__fadeIn">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
       
+      <!-- Left: Icon + Title -->
+      <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3 mb-3 mb-sm-0">
+        <i class="bi bi-house-fill text-primary fs-1"></i>
+        <div>
+          <h2 class="mb-1 fw-bold gradient-text">BHouse Bills</h2>
+          <p class="text-muted mb-0">Track your shared BHouse expenses easily and efficiently.</p>
+        </div>
+      </div>
+
+      <!-- Right: Year Badge -->
+      <div class="text-sm-end">
+        <span class="badge bg-gradient bg-info text-dark fs-6 px-3 py-2 shadow-sm">
+          {{ current_year }}
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+  
       <div>
         <button id="themeToggle" class="btn btn-outline-light">🌙</button>
         <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addModal">➕ Add Debt</button>
