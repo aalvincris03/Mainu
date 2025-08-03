@@ -66,19 +66,6 @@ def index():
         .group_by(Borrower.name, Lender.name).all())
     current_year = datetime.now().year
 
-    name_filter = request.args.get('name', type=int)
-    sort_by = request.args.get('sort', default='date')
-
-    query = Debt.query
-
-    if name_filter:
-        query = query.filter(Debt.name_id == name_filter)
-
-    if sort_by == 'amount':
-        query = query.order_by(Debt.amount.desc())
-    else:
-        query = query.order_by(Debt.date.desc())
-
     
     #return render_template("index.html", persons=persons, debts=debts, history=history)
 
@@ -98,9 +85,8 @@ def index():
                            debts=debts, 
                            history=history,
                            unpaid_by_name_lender=unpaid_by_name_lender,
-                           current_year=current_year,
-                          name_filter=name_filter,
-                          sort_by=sort_by)
+                           current_year=current_year
+                          )
 
 # One-time init route to create tables
 @app.route('/initdb')
