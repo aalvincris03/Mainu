@@ -199,9 +199,10 @@
       </div>
 
       <!-- Year Badge -->
-      <span class="badge gradient-text text-light px-3 py-1 fs-6 fw-semibold">
+      <span id="live-time" class="badge gradient-text text-light px-3 py-1 fs-6 fw-semibold">
         {{ current_year }}
       </span>
+      <span id="live-time" class="ms-2 small text-muted"></span>
       <button id="themeToggle" class="btn btn-outline-light">🌙</button>
     </div>
   </div>
@@ -588,7 +589,17 @@ document.addEventListener('DOMContentLoaded', function () {
   overlay.addEventListener('click', closeSidebar);
 </script>
 
+<script>
+  function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('live-time').textContent = timeString;
+  }
 
+  setInterval(updateTime, 1000); // update every second
+  updateTime(); // initial call
+</script>
+  
 
   
   <footer class="sticky-top py-3 mt-1 shadow-lg">
