@@ -202,7 +202,7 @@
       <span id="live-time" class="badge gradient-text text-light px-3 py-1 fs-6 fw-semibold">
         {{ current_year }}
       </span>
-      <span id="live-time" class="ms-2 small text-muted"></span>
+      
       <button id="themeToggle" class="btn btn-outline-light">🌙</button>
     </div>
   </div>
@@ -265,7 +265,7 @@
   <div class="collapse show" id="debtTableCollapse">
     <div class="table-responsive">
       <table class="table table-bordered table-hover table-sm align-middle text-nowrap text-center mb-0">
-        <thead class="sticky-top bg-dark">
+        <thead class="bg-dark">
   <tr>
     <th class="d-none d-md-table-cell" onclick="sortTable(0)">Date 🔽</th>
     <th onclick="sortTable(1)">Name</th>
@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
   
-  <footer class="sticky-top py-3 mt-1 shadow-lg">
+  <footer class="fixed-footer py-3 mt-1 shadow-lg">
   <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 text-center text-sm-start small">
     <div>
       <span class="text-muted">© {{ current_year }} BHouse Bills</span>
