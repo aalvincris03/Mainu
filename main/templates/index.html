@@ -196,7 +196,7 @@
                 <tbody>
                   {% for h in history %}
                   <tr>
-                    <td><small>{{ h.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small></td>
+                    <td><small>{{ h.timestamp.strftime('%B-%d %H:%M') }}</small></td>
                     <td><small>{{ h.details }}</small></td>
                   </tr>
                   {% endfor %}
