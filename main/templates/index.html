@@ -175,7 +175,24 @@
 
 
 
+<form method="GET" action="{{ url_for('index') }}" class="mb-3 d-flex flex-wrap gap-2 align-items-center justify-content-between">
+  <!-- Filter by Name -->
+  <div class="input-group" style="max-width: 250px;">
+    <label class="input-group-text bg-dark text-white" for="filterName">Name</label>
+    <select class="form-select" name="name" id="filterName" onchange="this.form.submit()">
+      <option value="">All</option>
+      {% for person in persons %}
+        <option value="{{ person.id }}" {% if request.args.get('name', type=int) == person.id %}selected{% endif %}>{{ person.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
 
+  <!-- Sort Options -->
+  <div class="btn-group" role="group" aria-label="Sort buttons">
+    <a href="{{ url_for('index', sort='date', name=request.args.get('name')) }}" class="btn btn-outline-light btn-sm">Sort by Date</a>
+    <a href="{{ url_for('index', sort='amount', name=request.args.get('name')) }}" class="btn btn-outline-light btn-sm">Sort by Amount</a>
+  </div>
+</form>
   
 
 
