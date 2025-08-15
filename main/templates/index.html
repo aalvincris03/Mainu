@@ -638,7 +638,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <footer class="fixed-footer py-3 mt-1 shadow-lg">
   <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 text-center text-sm-start small">
     <div>
-      <span class="text-muted">© {{ current_year if desktop_mode else 'July 31,2025 - ' ~ date_now }} BHouse Bills</span>
+      <span class="text-muted">© {{ current_year if not desktop_mode else 'July 31,2025 - ' ~ date_now.strftime("%B %d,%Y") }} BHouse Bills</span>
     </div>
   </div>
   </footer>
