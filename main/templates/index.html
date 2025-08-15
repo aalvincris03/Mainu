@@ -143,7 +143,21 @@
   }
 
 </style>
-  
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .desktop-sim {
+      background-color: #f0f0f0;
+    }
+   </style>
   
 </head>
 <body class="p-3">
@@ -172,7 +186,7 @@
     <li class="nav-item mb-2"><a href="#debtTableCollapse" class="nav-link text-white">📋 Debts</a></li>
     <li class="nav-item mb-2"><a href="#history" class="nav-link text-white">🕒 History</a></li>
     <li class="nav-item mb-2"><a href="#addDebt" class="nav-link text-white">➕ Add Debt</a></li>
-    <li class="nav-item mb-2"><button class="nav-link text-white" id="desktopToggle">💻 Hide Table</button></li>
+    <li class="nav-item mb-2"><button class="nav-link text-white" id="desktopToggle" onclick="toggleDesktopView()">💻 Hide Table</button></li>
   </ul>
 </div>
 
@@ -606,19 +620,23 @@ document.addEventListener('DOMContentLoaded', function () {
   updateTime(); // initial call
 
 //desktop view
-  const desktopToggle = document.getElementById("desktopToggle");
-const debtTable = document.getElementById("debtTable");
+  let isDesktop = false;
 
-desktopToggle.onclick = () => {
-  const isVisible = !debtTable.classList.contains("d-none");
-  if (isVisible) {
-    debtTable.classList.add("d-none");
-    desktopToggle.textContent = "💻 Show Table";
-  } else {
-    debtTable.classList.remove("d-none");
-    desktopToggle.textContent = "💻 Hide Table";
-  }
-};
+    function toggleDesktopView() {
+      const viewport = document.getElementById("viewportMeta");
+      if (!isDesktop) {
+        // Simulate a desktop viewport width
+        viewport.setAttribute("content", "width=1024");
+        document.body.classList.add("desktop-sim");
+        event.target.innerText = "Switch to Mobile View";
+      } else {
+        // Revert to mobile viewport
+        viewport.setAttribute("content", "width=device-width, initial-scale=1.0");
+        document.body.classList.remove("desktop-sim");
+        event.target.innerText = "View Desktop Site";
+      }
+      isDesktop = !isDesktop;
+    }
 </script>
   
 
