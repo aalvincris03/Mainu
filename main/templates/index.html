@@ -214,13 +214,13 @@
       </span>
       
       <button id="themeToggle" class="btn btn-outline-light">🌙</button>
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>{{ "Desktop Mode" if desktop_mode else "Mobile Mode" }}</h4>
-        <a href="{{ url_for('toggle_view') }}" 
-           class="btn btn-{{ 'secondary' if desktop_mode else 'primary' }}">
-            {{ "Switch to Mobile" if desktop_mode else "Switch to Desktop" }}
-        </a>
-      </div>
+
+       <!-- Floating toggle button -->
+    <a href="{{ url_for('toggle_view') }}" 
+       class="btn btn-{{ 'secondary' if desktop_mode else 'primary' }} view-toggle-btn">
+        <i class="bi {{ 'bi-phone' if desktop_mode else 'bi-laptop' }}"></i>
+    </a>
+      
     </div>
   </div>
 </header>
