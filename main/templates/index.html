@@ -179,13 +179,8 @@
     <li class="nav-item mb-2"><a href="#history" class="nav-link text-white">🕒 History</a></li>
     <li class="nav-item mb-2"><a href="#addDebt" class="nav-link text-white">➕ Add Debt</a></li>
     <li class="nav-item mb-2"><button class="nav-link text-white" id="desktopBtn">💻 Destop View</button></li>
-      <li class="nav-item mb-2"> <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>{{ "Desktop Mode" if desktop_mode else "Mobile Mode" }}</h4>
-        <a href="{{ url_for('toggle_view') }}" 
-           class="btn btn-{{ 'secondary' if desktop_mode else 'primary' }}">
-            {{ "Switch to Mobile" if desktop_mode else "Switch to Desktop" }}
-        </a>
-       </div>
+      <li class="nav-item mb-2"> 
+        
       </li>
   </ul>
 </div>
@@ -219,6 +214,13 @@
       </span>
       
       <button id="themeToggle" class="btn btn-outline-light">🌙</button>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ "Desktop Mode" if desktop_mode else "Mobile Mode" }}</h4>
+        <a href="{{ url_for('toggle_view') }}" 
+           class="btn btn-{{ 'secondary' if desktop_mode else 'primary' }}">
+            {{ "Switch to Mobile" if desktop_mode else "Switch to Desktop" }}
+        </a>
+      </div>
     </div>
   </div>
 </header>
