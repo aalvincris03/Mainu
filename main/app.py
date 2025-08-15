@@ -80,13 +80,24 @@ def index():
                 flash(str(e), 'warning')
         return redirect(url_for('index'))
 
+
+    desktop_mode = session.get("desktop_mode", False)
     return render_template('index.html', tables=tables,
                            persons=persons, 
                            debts=debts, 
                            history=history,
                            unpaid_by_name_lender=unpaid_by_name_lender,
-                           current_year=current_year
+                           current_year=current_year,desktop_mode=desktop_mode
                           )
+
+
+@app.route("/toggle_view")
+def toggle_view():
+    current = session.get("desktop_mode", False)
+    session["desktop_mode"] = not current
+    return redirect(url_for("index"))
+
+
 
 # One-time init route to create tables
 @app.route('/initdb')
