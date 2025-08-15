@@ -67,7 +67,7 @@ def index():
         .filter(Debt.status == False)
         .group_by(Borrower.name, Lender.name).all())
     current_year = datetime.now().year
-    date_now = datetime.now().strftime("%B %d,%Y")
+    date_now = datetime.now()
 
     
     #return render_template("index.html", persons=persons, debts=debts, history=history)
