@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>BHouse Bills</title>
   <!--<meta name="viewport" content="width=device-width, initial-scale=1" id="viewportMeta">-->
+    <meta name="viewport" 
+          content="{% if desktop_mode %}width=1024{% else %}width=device-width, initial-scale=1.0{% endif %}">
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#1f1f1f">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
@@ -142,12 +144,11 @@
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-</style>
-     <style>
-        /* Optional: force wider view */
-        body.desktop-mode {
-            min-width: 1024px; /* typical desktop width */
-        }
+  <style>
+        /* Optional: prevent small mobile wrapping in desktop mode */
+        {% if desktop_mode %}
+        body { min-width: 1024px; }
+        {% endif %}
     </style>
   
 </head>
@@ -178,6 +179,14 @@
     <li class="nav-item mb-2"><a href="#history" class="nav-link text-white">🕒 History</a></li>
     <li class="nav-item mb-2"><a href="#addDebt" class="nav-link text-white">➕ Add Debt</a></li>
     <li class="nav-item mb-2"><button class="nav-link text-white" id="desktopBtn">💻 Destop View</button></li>
+      <li class="nav-item mb-2"> <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ "Desktop Mode" if desktop_mode else "Mobile Mode" }}</h4>
+        <a href="{{ url_for('toggle_view') }}" 
+           class="btn btn-{{ 'secondary' if desktop_mode else 'primary' }}">
+            {{ "Switch to Mobile" if desktop_mode else "Switch to Desktop" }}
+        </a>
+       </div>
+      </li>
   </ul>
 </div>
 
