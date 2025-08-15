@@ -16,6 +16,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = "alvin"
 db = SQLAlchemy(app)
 
 class Person(db.Model):
