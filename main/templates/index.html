@@ -172,6 +172,7 @@
     <li class="nav-item mb-2"><a href="#debtTableCollapse" class="nav-link text-white">📋 Debts</a></li>
     <li class="nav-item mb-2"><a href="#history" class="nav-link text-white">🕒 History</a></li>
     <li class="nav-item mb-2"><a href="#addDebt" class="nav-link text-white">➕ Add Debt</a></li>
+    <li class="nav-item mb-2"><button class="nav-link text-white" id="desktopToggle">💻 Hide Table</button></li>
   </ul>
 </div>
 
@@ -603,6 +604,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setInterval(updateTime, 1000); // update every second
   updateTime(); // initial call
+
+//desktop view
+  const desktopToggle = document.getElementById("desktopToggle");
+const debtTable = document.getElementById("debtTable");
+
+desktopToggle.onclick = () => {
+  const isVisible = !debtTable.classList.contains("d-none");
+  if (isVisible) {
+    debtTable.classList.add("d-none");
+    desktopToggle.textContent = "💻 Show Table";
+  } else {
+    debtTable.classList.remove("d-none");
+    desktopToggle.textContent = "💻 Hide Table";
+  }
+};
 </script>
   
 
