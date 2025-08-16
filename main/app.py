@@ -14,9 +14,16 @@ from flask import Flask, render_template, request, redirect, url_for, session
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "alvin"
+try:
+	app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://mydb_6p29_user:yVX9Nl1U24YxW7Mce1caw4fuuJt7VuP4@dpg-d24nssvgi27c73b8cb5g-a.oregon-postgres.render.com/mydb_6p29" or os.environ.get('DATABASE_URL')
+	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+	app.secret_key = "alvin"
+except:
+	BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
+	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+	app.secret_key = "alvin"
+	
 db = SQLAlchemy(app)
 
 class Person(db.Model):
@@ -147,7 +154,8 @@ def toggle_theme():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+  #  app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
 
 
 @app.route("/split", methods=["POST"])
@@ -227,3 +235,4 @@ def sw():
 @app.route('/ping')
 def ping():
     return '', 204
+

@@ -1,7 +1,0 @@
-
-body {
-  transition: background-color 0.5s, color 0.5s;
-}
-.toast-container {
-  z-index: 1055;
-}
