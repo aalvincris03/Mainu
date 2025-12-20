@@ -5,21 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unpaid Debts Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; }
-        .container { margin-top: 50px; }
-        .table-container { background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 30px; }
-        .table thead th { background-color: #007bff; color: white; border: none; }
-        .table tbody tr:hover { background-color: #f1f3f4; }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .header-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        }
+        .header-icon {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .table-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        .table thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 15px;
+        }
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border: none;
+        }
         .table { border-radius: 10px; overflow: hidden; }
-        h1 { color: #343a40; text-align: center; margin-bottom: 40px; }
-        .no-data { color: #6c757d; font-style: italic; }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(135deg, #218838 0%, #17a2b8 100%);
+        }
+        .no-data {
+            color: #6c757d;
+            font-style: italic;
+            text-align: center;
+            padding: 50px;
+            font-size: 1.1rem;
+        }
+        .amount-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .date-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .container { margin-top: 20px; }
+            .header-card, .table-container { padding: 20px; }
+            .table thead th, .table tbody td { padding: 10px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="display-4">Unpaid Debts: {{ borrower.name }} owes {{ lender.name }}</h1>
-        <a href="{{ url_for('display_all_data') }}" class="btn btn-secondary mb-3">Back to Main</a>
         <div class="table-container">
             {% if unpaid_debts %}
                 <div class="table-responsive">
@@ -30,6 +134,7 @@
                                 <th>Date</th>
                                 <th>Amount</th>
                                 <th>Reason</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,8 +142,13 @@
                                 <tr>
                                     <td>{{ debt.id }}</td>
                                     <td>{{ debt.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                                    <td>${{ "%.2f"|format(debt.amount) }}</td>
+                                    <td>₱{{ "%.2f"|format(debt.amount) }}</td>
                                     <td>{{ debt.reason }}</td>
+                                    <td>
+                                        <form method="POST" action="{{ url_for('mark_paid', debt_id=debt.id) }}" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to mark this debt as paid?')">Mark as Paid</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

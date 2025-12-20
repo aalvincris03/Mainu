@@ -212,6 +212,19 @@ def unpaid_details(borrower_id, lender_id):
     unpaid_debts = Debt.query.filter_by(name_id=borrower_id, lender_id=lender_id, status=False).all()
     return render_template('unpaid_details.html', borrower=borrower, lender=lender, unpaid_debts=unpaid_debts)
 
+@app.route('/mark_paid/<int:debt_id>', methods=['POST'])
+def mark_paid(debt_id):
+    debt = Debt.query.get_or_404(debt_id)
+    borrower = Person.query.get(debt.name_id)
+    lender = Person.query.get(debt.lender_id)
+    debt.status = True
+    db.session.commit()
+    history = History(action="mark_paid", debt_id=debt_id, details=f"Marked debt as paid: borrower {borrower.name}, lender {lender.name}, amount {debt.amount}, reason {debt.reason}")
+    db.session.add(history)
+    db.session.commit()
+    flash('Debt marked as paid successfully.', 'success')
+    return redirect(request.referrer or url_for('display_all_data'))
+
 @app.route('/unpaid_all')
 def unpaid_all():
     unpaid_debts = Debt.query.filter_by(status=False).all()
